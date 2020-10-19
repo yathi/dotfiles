@@ -1,1 +1,0 @@
-/Users/yathi/.zprezto/runcoms/zshrc
