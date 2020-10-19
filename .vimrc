@@ -1,9 +1,9 @@
-" Specify a directory for plugins
+" Specify a directory for plugins 
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -36,17 +36,8 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " Initialize plugin system
 call plug#end()
 
-" Required:
 filetype plugin indent on
 syntax enable
-
-" If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
-
-"End dein Scripts-------------------------
-"
 
 " filetype off
 let g:deoplete#enable_at_startup = 1
