@@ -1,59 +1,40 @@
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
+" Specify a directory for plugins
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" Required:
-set runtimepath+=/Users/yathi/.cache/dein/repos/github.com/Shougo/dein.vim
+" Make sure you use single quotes
+Plug 'Shougo/deoplete.nvim'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+"  Plug 'sheerun/vim-polyglot'
+"  Plug 'rust-lang/rust.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+"  Plug 'neovimhaskell/haskell-vim'
+Plug 'mhartington/oceanic-next'
+Plug 'gruvbox-community/gruvbox'
+Plug 'sainnhe/gruvbox-material'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-highlightedyank'
+Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
+Plug 'airblade/vim-gitgutter'
+"  Plug 'wincent/terminus'
+Plug 'dyng/ctrlsf.vim'
+"  Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-rails'
+Plug '907th/vim-auto-save'
+"  Plug 'dense-analysis/ale'
 
-" Required:
-if dein#load_state('/Users/yathi/.cache/dein')
-  call dein#begin('/Users/yathi/.cache/dein')
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('/Users/yathi/.cache/dein/repos/github.com/Shougo/dein.vim')
-  " Add or remove your plugins here like this:
-  "call dein#add('Shougo/neosnippet.vim')
-  "call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('tpope/vim-sensible')
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('vim-airline/vim-airline')
-  call dein#add('sheerun/vim-polyglot')
-  call dein#add('rust-lang/rust.vim')
-  call dein#add('/usr/local/opt/fzf')
-  call dein#add('junegunn/fzf.vim')
-  call dein#add('neovimhaskell/haskell-vim')
-  call dein#add('tjvr/vim-nearley')
-  call dein#add('rakr/vim-one')
-  call dein#add('mhartington/oceanic-next')
-  call dein#add('gruvbox-community/gruvbox')
-  call dein#add('sainnhe/gruvbox-material')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('mileszs/ack.vim')
-  call dein#add('mustache/vim-mustache-handlebars')
-  call dein#add('tpope/vim-commentary')
-  call dein#add('machakann/vim-highlightedyank')
-  call dein#add('neovim/nvim-lsp')
-  call dein#add('neovim/nvim-lspconfig')
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('wincent/terminus')
-  call dein#add('dyng/ctrlsf.vim')
-  call dein#add('thoughtbot/vim-rspec')
-  call dein#add('tpope/vim-endwise')
-  call dein#add('tpope/vim-rails')
-  call dein#add('tpope/vim-rails')
-  call dein#add('907th/vim-auto-save')
-  call dein#add('dense-analysis/ale')
-
-  " if you have to remove disabled 
-  " call map(dein#check_clean(), "delete(v:val, 'rf')")
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
+" Initialize plugin system
+call plug#end()
 
 " Required:
 filetype plugin indent on
