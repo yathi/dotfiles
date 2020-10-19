@@ -66,8 +66,15 @@ syntax enable
 
 "End dein Scripts-------------------------
 "
+
 " filetype off
 let g:deoplete#enable_at_startup = 1
+
+" Use ALE as completion sources for all code.
+call deoplete#custom#option('sources', {
+\ '_': ['ale'],
+\})
+
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -321,6 +328,7 @@ vnoremap : ;
 
 " Abbrevations
 ab mc :twisted_rightwards_arrows:
+
 
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
