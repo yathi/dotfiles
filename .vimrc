@@ -46,6 +46,7 @@ if dein#load_state('/Users/yathi/.cache/dein')
   call dein#add('tpope/vim-rails')
   call dein#add('tpope/vim-rails')
   call dein#add('907th/vim-auto-save')
+  call dein#add('dense-analysis/ale')
 
   " if you have to remove disabled 
   " call map(dein#check_clean(), "delete(v:val, 'rf')")
@@ -273,8 +274,6 @@ let g:airline_powerline_fonts = 1
     let g:airline_symbols.readonly = ''
     let g:airline_symbols.linenr = '☰'
     let g:airline_symbols.maxlinenr = ''
-
-let g:airline_theme='bubblegum'
 
 " Git gutter
 set updatetime=100
