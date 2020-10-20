@@ -298,6 +298,9 @@ nnoremap ; :
 vnoremap ; :
 vnoremap : ;
 
+" greatest remap ever
+vnoremap <leader>p "_dP
+
 " Abbrevations
 ab mc :twisted_rightwards_arrows:
 
