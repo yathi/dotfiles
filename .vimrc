@@ -27,7 +27,7 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails'
 Plug '907th/vim-auto-save'
-"  Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
