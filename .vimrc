@@ -27,11 +27,12 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails'
 Plug '907th/vim-auto-save'
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'elmcast/elm-vim', { 'for': 'elm' }
 
 " Initialize plugin system
 call plug#end()
@@ -43,9 +44,9 @@ syntax enable
 let g:deoplete#enable_at_startup = 1
 
 " Use ALE as completion sources for all code.
-call deoplete#custom#option('sources', {
-\ '_': ['ale'],
-\})
+" call deoplete#custom#option('sources', {
+" \ '_': ['ale'],
+" \})
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -75,16 +76,15 @@ vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
 " Colorscheme
-" " Theme
 " autocmd VimEnter * colorscheme OceanicNext
-colorscheme gruvbox
-set background=dark
 let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 let g:gruvbox_invert_selection='0'
+colorscheme gruvbox
+set background=dark
 
 " ================ General Config ====================
 " TABs and Spaces
@@ -128,8 +128,8 @@ endif
 
 " ================ Folds ============================
 set foldmethod=indent   "fold based on indent
-set foldnestmax=5       "deepest fold is 3 levels
-set foldlevelstart=2
+set foldnestmax=6       "deepest fold is 6 levels
+set foldlevelstart=3
 " set nofoldenable        "dont fold by default
 " toggle fold using space. Move right if not a fold level
 " change za to zA to open all folds recursively
@@ -142,6 +142,10 @@ highlight Comment cterm=italic
 
 if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
+endif
+
+if executable('rg')
+  let g:rg_derive_root='true'
 endif
 
 " Easier way of pressing ESC for a Dvorak user while in Insert mode
@@ -172,13 +176,11 @@ nnoremap <silent>K     <cmd>lua vim.lsp.buf.hover()<CR>
 " - down / up / left / right
 map <C-p> ;Files <CR>
 map <M-p> ;Files <CR>
-let g:fzf_layout = { 'down': '~80%' }
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'
 
-" In Neovim, you can set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
-" This decides the height
-let g:fzf_layout = { 'window': '40new' }
+" " This decides the height
+" let g:fzf_layout = { 'window': '40new' }
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -220,42 +222,45 @@ set splitright
 
 " airline config
 let g:airline_powerline_fonts = 1
-    if !exists('g:airline_symbols')
-        let g:airline_symbols = {}
-    endif
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
 
-    " unicode symbols
-    let g:airline_left_sep = '»'
-    let g:airline_left_sep = '▶'
-    let g:airline_right_sep = '«'
-    let g:airline_right_sep = '◀'
-    let g:airline_symbols.crypt = '🔒'
-    let g:airline_symbols.linenr = '☰'
-    let g:airline_symbols.linenr = '␊'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.linenr = '¶'
-    let g:airline_symbols.maxlinenr = ''
-    let g:airline_symbols.maxlinenr = '㏑'
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.paste = 'Þ'
-    let g:airline_symbols.paste = '∥'
-    let g:airline_symbols.spell = 'Ꞩ'
-    let g:airline_symbols.notexists = 'Ɇ'
-    let g:airline_symbols.whitespace = 'Ξ'
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = 'Ɇ'
+let g:airline_symbols.whitespace = 'Ξ'
 
-    " powerline symbols
-    let g:airline_left_sep = ''
-    let g:airline_left_alt_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_right_alt_sep = ''
-    let g:airline_symbols.branch = ''
-    let g:airline_symbols.readonly = ''
-    let g:airline_symbols.linenr = '☰'
-    let g:airline_symbols.maxlinenr = ''
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+
+" " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=50
 
 " Git gutter
-set updatetime=100
 set signcolumn=yes
 
 " terminal mode
