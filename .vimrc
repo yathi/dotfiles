@@ -8,6 +8,8 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-ruby/vim-ruby'
 "  Plug 'sheerun/vim-polyglot'
 "  Plug 'rust-lang/rust.vim'
 Plug '/usr/local/opt/fzf'
@@ -66,8 +68,8 @@ nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
-nmap <leader>cs ;let @*=expand("%")<CR>   " copy just the filename
-nmap <leader>cl ;let @*=expand("%:p")<CR> " copy the filename with path
+nmap <leader>cs :let @*=expand("%")<CR>   " copy just the filename
+nmap <leader>cl :let @*=expand("%:p")<CR> " copy the filename with path
 
 " " Paste from clipboard
 nnoremap <leader>p "+p
@@ -85,6 +87,8 @@ endif
 let g:gruvbox_invert_selection='0'
 colorscheme gruvbox
 set background=dark
+
+let g:airline_theme='bubblegum'
 
 " ================ General Config ====================
 " TABs and Spaces
@@ -130,7 +134,7 @@ endif
 set foldmethod=indent   "fold based on indent
 set foldnestmax=6       "deepest fold is 6 levels
 set foldlevelstart=3
-" set nofoldenable        "dont fold by default
+set nofoldenable        "dont fold by default
 " toggle fold using space. Move right if not a fold level
 " change za to zA to open all folds recursively
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -164,18 +168,19 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Toggle NERDTREE
-map <C-n> ;NERDTreeToggle %<CR>
+map <C-n> :NERDTreeToggle %<CR>
 
 " lsp shortcuts
 nnoremap <silent>gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent><c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent>K     <cmd>lua vim.lsp.buf.hover()<CR>
 
+nnoremap <silent> <Leader>f :Rg<CR>
 " FZF
 " Default fzf layout
 " - down / up / left / right
-map <C-p> ;Files <CR>
-map <M-p> ;Files <CR>
+map <C-p> :Files <CR>
+map <D-p> :Files <CR>
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
 
@@ -274,9 +279,9 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 
 " RSpec.vim mappings
-map <Leader>t ;call RunCurrentSpecFile()<CR>
-map <Leader>s ;call RunNearestSpec()<CR>
-map <Leader>l ;call RunLastSpec()<CR>
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
 let g:rspec_runner = "os_x_iterm"
 
 " CTRLSF Mappings
@@ -298,10 +303,11 @@ nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
 
 " swap ; and : in visual and normal mode
-nnoremap : ;
-nnoremap ; :
-vnoremap ; :
-vnoremap : ;
+" Don't need this with new keyboard
+" nnoremap : ;
+" nnoremap ; :
+" vnoremap ; :
+" vnoremap : ;
 
 " greatest remap ever
 vnoremap <leader>p "_dP
@@ -314,8 +320,5 @@ ab mc :twisted_rightwards_arrows:
 " All messages and errors will be ignored.
 silent! helptags ALL
 
-
-:lua << END
-require'nvim_lsp'.tsserver.setup{}
-require'nvim_lsp'.solargraph.setup{}
-END
+lua require'nvim_lsp'.tsserver.setup{}
+lua require'nvim_lsp'.solargraph.setup{}
