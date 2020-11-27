@@ -53,5 +53,4 @@ fi
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export DANGER_GITHUB_API_TOKEN="d30bd6cc0fd741fc5c6b8022d23b98e8c3adeb16"
 
